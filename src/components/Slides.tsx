@@ -24,6 +24,7 @@ const imageStyles = {
 }
 import { EditPost } from './EditPost';
 import { useDrawerContext } from '../providers/DrawerProvider';
+import { AuthorHeader } from './AuthorHeader';
 
 const swiperContainer = { display: 'flex', flexDirection: 'row' }
 export const Slides: React.FC<SlidesProps> = ({ slides, postId }) => {
@@ -97,6 +98,8 @@ export const Slides: React.FC<SlidesProps> = ({ slides, postId }) => {
                >
 
                </Swiper> */}
+                           <AuthorHeader authorId='max' />
+
                 {displayedCaptions[page-1]}
             </Box>
         </Box>

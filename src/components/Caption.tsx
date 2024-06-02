@@ -36,7 +36,6 @@ export const Caption: React.FC<CaptionProps> = ({ caption }) => {
 
     
     const boxStyle = {
-        pt: 3,
         background: `linear-gradient(
             to top,
             hsla(0, 0%, 0%, 0.75) 0%,
@@ -61,7 +60,6 @@ export const Caption: React.FC<CaptionProps> = ({ caption }) => {
     
     return (
         <Box sx={boxStyle}>
-            <AuthorHeader authorId='max' />
             <Box onClick={onClick} sx={textContainerStyles}>
     
                 <Typography
