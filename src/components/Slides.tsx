@@ -11,6 +11,7 @@ import 'swiper/css/navigation';
 import 'swiper/css/controller';
 interface SlidesProps {
     slides: { imagePath: string, caption: string }[]
+    postId: string;
 }
 // image conforms to parent div
 const imageStyles = {
@@ -21,11 +22,15 @@ const imageStyles = {
     position: 'relative'
 
 }
+import { EditPost } from './EditPost';
+import { useDrawerContext } from '../providers/DrawerProvider';
 
 const swiperContainer = { display: 'flex', flexDirection: 'row' }
-export const Slides: React.FC<SlidesProps> = ({ slides }) => {
+export const Slides: React.FC<SlidesProps> = ({ slides, postId }) => {
     const [firstSwiper, setFirstSwiper] = React.useState(null);
     const [secondSwiper, setSecondSwiper] = React.useState(null);
+    const drawerContext = useDrawerContext();
+
     const [page, setPage] = React.useState(1);
     // from docs
 
@@ -55,6 +60,10 @@ export const Slides: React.FC<SlidesProps> = ({ slides }) => {
 
         </SwiperSlide>
     )
+    const onMoreClick = () => {
+        drawerContext.setComponent(<EditPost postId={postId}/>)
+        drawerContext.onOpen();
+    }
     return (
         <Box sx={{
              position: 'relative',
@@ -64,7 +73,7 @@ export const Slides: React.FC<SlidesProps> = ({ slides }) => {
          }}>
             <Box sx={{ width: '100%', position: 'absolute', top: 0, zIndex: 2, display: 'flex', alignItems: 'center' }}>
                 <Chip size='small' sx={{ ml: 'auto', backdropFilter: 'blur(2px)' }} label={`${page}/${slides.length}`} />
-                <IconButton ><MoreVert /></IconButton>
+                <IconButton onClick={onMoreClick} ><MoreVert /></IconButton>
             </Box>
             <Box sx={swiperContainer}>
                 <Swiper

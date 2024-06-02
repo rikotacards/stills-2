@@ -114,9 +114,9 @@ export const AddPostInput: React.FC<AddPostInputProps> = ({ id, index, moveSlide
                 <Box>
                     <TextField value={captions[id]} onChange={(e) => onCaptionChange(e, id)} multiline />
                 </Box>
-                <IconButton onClick={() => deleteInput(index, id)}>
+               {index !== 0 && <IconButton onClick={() => deleteInput(index, id)}>
                     <ClearIcon />
-                </IconButton>
+                </IconButton>}
 
             </Box>
         </div>
