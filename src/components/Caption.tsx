@@ -63,7 +63,9 @@ export const Caption: React.FC<CaptionProps> = ({ caption }) => {
     
                 <Typography
                     sx={textStyles}
-                    variant='body2'>
+                    variant='body2'
+                    fontWeight={'500'}
+                    >
                     {caption}
                 </Typography>
 

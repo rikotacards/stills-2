@@ -33,6 +33,9 @@ const router = createBrowserRouter([
 ])
 
 const darkTheme = createTheme({
+  typography: {
+    // fontFamily: ['Roboto'].join(',')
+  },
   palette: {
     mode: 'dark',
     // background: {
