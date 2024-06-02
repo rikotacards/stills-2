@@ -222,3 +222,5 @@ Error: An unexpected error has occurred.
 * crossfade issue, https://github.com/nolimits4web/swiper/issues/1098
 * make image responsive
    * https://www.w3schools.com/howto/howto_css_image_responsive.asp
+* easing gradients
+   * https://larsenwork.com/easing-gradients/

@@ -1,4 +1,4 @@
-import { Box, Avatar, Typography } from '@mui/material';
+import { Box, Avatar, Typography, Chip } from '@mui/material';
 import React from 'react';
 import image from '../assets/michael.png'
 interface AuthorHeaderProps {

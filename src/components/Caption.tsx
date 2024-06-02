@@ -1,4 +1,4 @@
-import { Box, Typography } from '@mui/material';
+import { Box, Chip, Typography } from '@mui/material';
 import React from 'react';
 import { AuthorHeader } from './AuthorHeader';
 interface CaptionProps {
@@ -23,12 +23,13 @@ export const Caption: React.FC<CaptionProps> = ({ caption }) => {
 
     }
     const textContainerStyles = {
-        height: isOpen ? '200px' : '45px',
-        maxHeight: 'fit-content',
+        height: 'fit-content',
+        maxHeight: '40%',
         overflowY: 'scroll',
         ['scrollbar-width']: 'none',
         transition: 'height 0.1s',
-        backdropFilter: isOpen ? 'blur(2px)' : 'blur(0px)'
+        display: 'flex',
+        mr:1,
 
 
     }
@@ -59,7 +60,6 @@ export const Caption: React.FC<CaptionProps> = ({ caption }) => {
     }
     
     return (
-        <Box sx={boxStyle}>
             <Box onClick={onClick} sx={textContainerStyles}>
     
                 <Typography
@@ -67,8 +67,8 @@ export const Caption: React.FC<CaptionProps> = ({ caption }) => {
                     variant='body2'>
                     {caption}
                 </Typography>
+
             </Box>
-        </Box>
     )
 }
 

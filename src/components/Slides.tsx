@@ -31,6 +31,32 @@ export const Slides: React.FC<SlidesProps> = ({ slides, postId }) => {
     const [firstSwiper, setFirstSwiper] = React.useState(null);
     const [secondSwiper, setSecondSwiper] = React.useState(null);
     const drawerContext = useDrawerContext();
+    const boxStyle = {
+        pt: 1,
+        pb:1,
+        background: `linear-gradient(
+            to bottom,
+            hsla(0, 0%, 0%, 0) 0%,
+            hsla(0, 0%, 0%, 0.009) 6.8%,
+            hsla(0, 0%, 0%, 0.035) 13.4%,
+            hsla(0, 0%, 0%, 0.076) 19.8%,
+            hsla(0, 0%, 0%, 0.128) 26%,
+            hsla(0, 0%, 0%, 0.189) 32.1%,
+            hsla(0, 0%, 0%, 0.257) 38.2%,
+            hsla(0, 0%, 0%, 0.329) 44.3%,
+            hsla(0, 0%, 0%, 0.401) 50.5%,
+            hsla(0, 0%, 0%, 0.473) 56.7%,
+            hsla(0, 0%, 0%, 0.541) 63.2%,
+            hsla(0, 0%, 0%, 0.602) 69.9%,
+            hsla(0, 0%, 0%, 0.654) 76.8%,
+            hsla(0, 0%, 0%, 0.695) 84.1%,
+            hsla(0, 0%, 0%, 0.721) 91.8%,
+            hsla(0, 0%, 0%, 0.73) 100%
+          );`
+
+
+    }
+
 
     const [page, setPage] = React.useState(1);
     // from docs
@@ -40,38 +66,38 @@ export const Slides: React.FC<SlidesProps> = ({ slides, postId }) => {
             key={i}
         >
 
-                <Box onLoadedData={() => { console.log('STARTL') }}
-                    onLoad={() => { console.log('LOD') }}
-                    component='img'
-                    sx={imageStyles}
-                    src={s.imagePath} />
+            <Box onLoadedData={() => { console.log('STARTL') }}
+                onLoad={() => { console.log('LOD') }}
+                component='img'
+                sx={imageStyles}
+                src={s.imagePath} />
 
         </SwiperSlide>
     )
     const displayedCaptions = slides.map((s, i) =>
-        <SwiperSlide
-        
+        <Box
+
             key={s.caption + i}
-            style={{ display: 'flex', flexDirection: 'column' }}
+        // style={{ display: 'flex', flexDirection: 'column' }}
         >
 
 
             <Caption caption={s.caption} />
 
 
-        </SwiperSlide>
+        </Box>
     )
     const onMoreClick = () => {
-        drawerContext.setComponent(<EditPost postId={postId}/>)
+        drawerContext.setComponent(<EditPost postId={postId} />)
         drawerContext.onOpen();
     }
     return (
         <Box sx={{
-             position: 'relative',
-         display: 'flex',
-        //  width: '100%', 
-        flexDirection: 'column'
-         }}>
+            position: 'relative',
+            display: 'flex',
+            //  width: '100%', 
+            flexDirection: 'column'
+        }}>
             <Box sx={{ width: '100%', position: 'absolute', top: 0, zIndex: 2, display: 'flex', alignItems: 'center' }}>
                 <Chip size='small' sx={{ ml: 'auto', backdropFilter: 'blur(2px)' }} label={`${page}/${slides.length}`} />
                 <IconButton onClick={onMoreClick} ><MoreVert /></IconButton>
@@ -89,7 +115,7 @@ export const Slides: React.FC<SlidesProps> = ({ slides, postId }) => {
                 </Swiper>
             </Box>
             <Box sx={{ zIndex: 10, position: 'absolute', bottom: 0, textAlign: 'left', width: '100%' }}>
-               {/* <Swiper
+                {/* <Swiper
                   modules={[Controller, EffectFade]}
                   onSwiper={(s) =>setSecondSwiper(s)}
                   effect='fade'
@@ -98,9 +124,13 @@ export const Slides: React.FC<SlidesProps> = ({ slides, postId }) => {
                >
 
                </Swiper> */}
-                           <AuthorHeader authorId='max' />
+                <Box sx={boxStyle}>
 
-                {displayedCaptions[page-1]}
+                    <AuthorHeader authorId='max' />
+
+                    {displayedCaptions[page - 1]}
+
+                </Box>
             </Box>
         </Box>
     )
