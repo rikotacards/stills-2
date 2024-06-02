@@ -25,7 +25,8 @@ const imageStyles = {
 import { EditPost } from './EditPost';
 import { useDrawerContext } from '../providers/DrawerProvider';
 import { AuthorHeader } from './AuthorHeader';
-
+import AddReactionIcon from '@mui/icons-material/AddReaction';
+import ChatBubbleIcon from '@mui/icons-material/ChatBubble';
 const swiperContainer = { display: 'flex', flexDirection: 'row' }
 export const Slides: React.FC<SlidesProps> = ({ slides, postId }) => {
     const [firstSwiper, setFirstSwiper] = React.useState(null);
@@ -99,8 +100,8 @@ export const Slides: React.FC<SlidesProps> = ({ slides, postId }) => {
             flexDirection: 'column'
         }}>
             <Box sx={{ width: '100%', position: 'absolute', top: 0, zIndex: 2, display: 'flex', alignItems: 'center' }}>
-                <Chip size='small' sx={{ ml: 'auto', backdropFilter: 'blur(2px)' }} label={`${page}/${slides.length}`} />
-                <IconButton onClick={onMoreClick} ><MoreVert /></IconButton>
+                <IconButton sx={{ml:'auto'}} onClick={onMoreClick} ><MoreVert /></IconButton>
+                <Chip size='small' sx={{ backdropFilter: 'blur(2px)' }} label={`${page}/${slides.length}`} />
             </Box>
             <Box sx={swiperContainer}>
                 <Swiper
@@ -129,7 +130,14 @@ export const Slides: React.FC<SlidesProps> = ({ slides, postId }) => {
                     <AuthorHeader authorId='max' />
 
                     {displayedCaptions[page - 1]}
-
+                <Box sx={{ml:1, mb:1}}>
+                    <Chip sx={{mr:1}} size='small' label='good'/>
+                    <Chip sx={{mr:1}} size='small' label='Bad'/>
+                    <Chip sx={{mr:1}} size='small' label='Lol'/>
+                    <Chip sx={{mr:1}} size='small' icon={<AddReactionIcon fontSize='small'/>} />
+                    <IconButton size='small'><AddReactionIcon fontSize='small'/></IconButton>
+                    <IconButton size='small'><ChatBubbleIcon fontSize='small'/></IconButton>
+                </Box>
                 </Box>
             </Box>
         </Box>

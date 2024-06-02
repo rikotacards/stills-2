@@ -19,7 +19,7 @@ export const Caption: React.FC<CaptionProps> = ({ caption }) => {
         ml: 1,
         mr: 1,
         mb:1,
-        textShadow: '0 0 0px #000',
+
 
     }
     const textContainerStyles = {
@@ -30,7 +30,6 @@ export const Caption: React.FC<CaptionProps> = ({ caption }) => {
         transition: 'height 0.1s',
         display: 'flex',
         mr:1,
-
 
     }
 
