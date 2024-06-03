@@ -29,12 +29,8 @@ export const QuickReactions: React.FC<CommentsProps> = ({ postId }) => {
 
                     {emojis.map((e) => <IconButton sx={{ height: 50, width: 50 }}>{e}</IconButton>)}
                 </Box>
-                <Button>More</Button>
-                <Box sx={{ display: 'flex', alignItems: 'center' }}>
-
-                    <Avatar sx={{ mr: 1 }}></Avatar>
-                    <TextField fullWidth />
-                </Box>
+                <Button variant='contained' fullWidth>More</Button>
+               
             </Box>
         </Box>
     )

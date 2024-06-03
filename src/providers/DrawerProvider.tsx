@@ -34,7 +34,6 @@ export const DrawerProvider: React.FC<DrawerProviderProps> = ({children}) => {
             {children}
             <Drawer 
             anchor='bottom'
-            hideBackdrop
             // PaperProps={{backgroundColor: 'blue'}}
              onClose={onClose} 
              open={open}>
