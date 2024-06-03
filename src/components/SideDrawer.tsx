@@ -7,7 +7,8 @@ export const drawerWidth = 240;
 const menuItems = [
   {label:'Home', path: '/' },
 {  label: 'Create', path: '/create'},
- {label: 'Drafts', path: '/drafts'}
+ {label: 'Drafts', path: '/drafts'},
+ {label: 'Account', path: '/account'}
 ]
 export const SideDrawer: React.FC = () => {
   const nav = useNavigate();

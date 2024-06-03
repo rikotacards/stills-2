@@ -12,6 +12,7 @@ import { DraftsPage } from './pages/DraftsPage';
 import { ProfilePage } from './pages/ProfilePage';
 import { DrawerProvider } from './providers/DrawerProvider';
 import { NewPostProvider } from './providers/NewPostProvider';
+import { AccountPage } from './pages/AccountPage';
 
 const router = createBrowserRouter([
   {
@@ -29,6 +30,10 @@ const router = createBrowserRouter([
       {
         path: '/drafts',
         element: <DraftsPage/>
+      },
+      {
+        path: '/account',
+        element: <AccountPage/>
       }
     ]
   }
