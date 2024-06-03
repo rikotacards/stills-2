@@ -2,6 +2,7 @@ import React from 'react';
 import { getReactions } from '../firebase/reactions';
 import { Box, Chip } from '@mui/material';
 import './Reactions.css'
+import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 interface ReactionsProps {
     postId: string
 }

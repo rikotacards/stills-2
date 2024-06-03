@@ -83,7 +83,8 @@ export const Slides: React.FC<SlidesProps> = ({ children, slides, postId }) => {
             position: 'relative',
             display: 'flex',
             //  width: '100%', 
-            flexDirection: 'column'
+            flexDirection: 'column',
+
         }}>
             <Box sx={{pr:1, width: '100%', position: 'absolute', top: 0, zIndex: 2, display: 'flex', alignItems: 'center' }}>
                 <IconButton sx={{ ml: 'auto' }} onClick={onMoreClick} ><MoreVert /></IconButton>
@@ -111,7 +112,7 @@ export const Slides: React.FC<SlidesProps> = ({ children, slides, postId }) => {
                >
 
                </Swiper> */}
-                <Box sx={{ boxStyle }} className={slides[page-1].caption.length === 0 ? undefined : 'bottom'}>
+                <Box sx={{ boxStyle }} className={slides?.[page-1]?.caption?.length === 0 ? undefined : 'bottom'}>
 
                     <AuthorHeader postId={postId} authorId='max' />
                     <Box sx={{ display: 'flex', alignItems: 'center', mb:1 }}>
@@ -123,7 +124,7 @@ export const Slides: React.FC<SlidesProps> = ({ children, slides, postId }) => {
                     </Box>
 
 
-                    <Box sx={{ ml: 1, mb: 0, display: 'flex', mr: 1, alignItems: 'center' }}>
+                    <Box sx={{ ml: 1, pb:1, display: 'flex', mr: 1, alignItems: 'center' }}>
 {false &&                        <Reactions postId={postId} />}
                         <Box sx={{ ml: 'auto', display: 'flex' }}>
 
@@ -131,7 +132,6 @@ export const Slides: React.FC<SlidesProps> = ({ children, slides, postId }) => {
                             <IconButton onClick={onCommentsClick} size='small'><ChatBubbleIcon fontSize='small' /></IconButton> */}
                         </Box>
                     </Box>
-                    {children}
                 </Box>
             </Box>
         </Box>

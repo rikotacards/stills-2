@@ -15,7 +15,7 @@ interface PostProps {
     slides: { imagePath: string; caption: string }[];
     authorId: string;
     postId: string;
-    createdAt: Timestamp;
+    createdAt?: Timestamp;
 }
 
 const postContainerStyles = {
@@ -30,7 +30,6 @@ const postContainerStyles = {
     // border: '1px solid white',
 }
 export const Post: React.FC<PostProps> = ({ createdAt, postId, slides, authorId }) => {
-    const drawerContext = useDrawerContext();
     const onAddReaction = async () => {
         addReaction({
             postAuthorId: UID,
@@ -51,15 +50,14 @@ export const Post: React.FC<PostProps> = ({ createdAt, postId, slides, authorId 
     return (
         <Box sx={postContainerStyles}>
 
-            <Slides postId={postId} slides={slides} >
-            </Slides>
+            <Slides postId={postId} slides={slides}/>
 
             {/* <Button size='small' onClick={onAddReaction} variant='contained'>Heart</Button>
             <Button size='small' onClick={onRemoveReaction} variant='contained'>Remove Heart</Button>  */}
             <Box sx={{ display: 'flex', ml: 1, mt: 1 }}>
                 <Typography variant='caption' color='GrayText'>
 
-                    {createdAt.toDate().toLocaleDateString("en-US", {month:'short', day: 'numeric', year: 'numeric'})}
+                    {createdAt && createdAt.toDate().toLocaleDateString("en-US", {month:'short', day: 'numeric', year: 'numeric'})}
 
 
                 </Typography>
