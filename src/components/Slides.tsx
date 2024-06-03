@@ -1,5 +1,5 @@
 
-import { Box, Chip, IconButton } from '@mui/material';
+import { Box, Chip, IconButton, Typography } from '@mui/material';
 import React from 'react';
 import { Caption } from './Caption';
 import { Swiper, SwiperSlide } from 'swiper/react';
@@ -28,8 +28,29 @@ export const Slides: React.FC<SlidesProps> = ({authorId, slides, postId }) => {
     const [secondSwiper, setSecondSwiper] = React.useState(null);
     const drawerContext = useDrawerContext();
     const boxStyle = {
-        pt: 1,
+        pt: 4,
         pb: 1,
+        pl:1,
+        pr:1,
+        background: `linear-gradient(
+            to bottom,
+            hsla(0, 0%, 0%, 0) 0%,
+      hsla(0, 0%, 0%, 0.034) 4.4%,
+      hsla(0, 0%, 0%, 0.079) 9.2%,
+      hsla(0, 0%, 0%, 0.133) 14.4%,
+      hsla(0, 0%, 0%, 0.193) 20%,
+      hsla(0, 0%, 0%, 0.258) 25.9%,
+      hsla(0, 0%, 0%, 0.326) 32.2%,
+      hsla(0, 0%, 0%, 0.394) 38.7%,
+      hsla(0, 0%, 0%, 0.462) 45.6%,
+      hsla(0, 0%, 0%, 0.527) 52.7%,
+      hsla(0, 0%, 0%, 0.587) 60.1%,
+      hsla(0, 0%, 0%, 0.641) 67.7%,
+      hsla(0, 0%, 0%, 0.686) 75.5%,
+      hsla(0, 0%, 0%, 0.72) 83.5%,
+      hsla(0, 0%, 0%, 0.742) 91.7%,
+      hsla(0, 0%, 0%, 0.75) 100%
+          )`
 
 
 
@@ -55,7 +76,7 @@ export const Slides: React.FC<SlidesProps> = ({authorId, slides, postId }) => {
         >
 
 
-            <Caption caption={s.caption} />
+            <Caption caption={s.caption} pages={slides.length} currIndex={page}/>
 
 
         </Box>
@@ -75,7 +96,6 @@ export const Slides: React.FC<SlidesProps> = ({authorId, slides, postId }) => {
 
         }}>
             <Box sx={{mt:1, pr:1, width: '100%', position: 'absolute', top: 0, zIndex: 2, display: 'flex', alignItems: 'center' }}>
-                <Chip size='medium' sx={{ ml:'auto', backdropFilter: 'blur(10px)', background: 'transparent' }} label={`${page}/${slides.length}`} />
                 <IconButton  onClick={onMoreClick} ><MoreVert /></IconButton>
             </Box>
             <Box sx={swiperContainer}>
@@ -100,14 +120,15 @@ export const Slides: React.FC<SlidesProps> = ({authorId, slides, postId }) => {
                >
 
                </Swiper> */}
-                <Box sx={{ boxStyle }} className={slides?.[page-1]?.caption?.length === 0 ? undefined : 'bottom'}>
+                <Box sx={ boxStyle } >
 
                     <AuthorHeader postId={postId} authorId={authorId || ''} />
-                    <Box sx={{ display: 'flex', alignItems: 'center', mb:1 }}>
+                    <Box sx={{ display: 'flex', alignItems: 'flex-end', mb:1 }}>
                         <Box>
-
                             {displayedCaptions[page - 1]}
                         </Box>
+                      
+                        
                         {/* <IconButton sx={{ml: 'auto', mr:1}} onClick={onCommentsClick} size='small'><ChatBubbleOutlineIcon fontSize='small' /></IconButton> */}
                     </Box>
 

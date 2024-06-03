@@ -1,15 +1,11 @@
-import { Avatar, Box, Button, Chip, IconButton, Typography } from '@mui/material';
+import {  Box,  Typography } from '@mui/material';
 import React from 'react';
 import { addReaction, removeReaction } from '../firebase/reactions';
 import { UID } from '../firebase/firebaseConfig';
-import { Reactions } from './Reactions';
-import { deletePost } from '../firebase/post';
+
 import { Slides } from './Slides';
-import { useDrawerContext } from '../providers/DrawerProvider';
-import { EditPost } from './EditPost';
-import AddReactionIcon from '@mui/icons-material/AddReaction';
-import ChatBubbleIcon from '@mui/icons-material/ChatBubble';
-import { FieldValue, Timestamp } from 'firebase/firestore';
+
+import {  Timestamp } from 'firebase/firestore';
 
 interface PostProps {
     slides: { imagePath: string; caption: string }[];
