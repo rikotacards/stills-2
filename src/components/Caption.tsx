@@ -13,12 +13,13 @@ export const Caption: React.FC<CaptionProps> = ({ caption }) => {
     }
     const textStyles = {
         display: '-webkit-box',
+        textShadow: '0 0 2px #000',
         ['-webkit-line-clamp']: isOpen ? undefined : '2',
         ['-webkit-box-orient']: 'vertical',
         overflow: 'hidden',
         ml: 1,
         mr: 1,
-        mb:1,
+        // mb:1,
 
 
     }
@@ -30,31 +31,7 @@ export const Caption: React.FC<CaptionProps> = ({ caption }) => {
         transition: 'height 0.1s',
         display: 'flex',
         mr:1,
-
-    }
-
-
-    
-    const boxStyle = {
-        background: `linear-gradient(
-            to top,
-            hsla(0, 0%, 0%, 0.75) 0%,
-            hsla(0, 0%, 0%, 0.74) 8.1%,
-            hsla(0, 0%, 0%, 0.714) 15.5%,
-            hsla(0, 0%, 0%, 0.672) 22.5%,
-            hsla(0, 0%, 0%, 0.618) 29%,
-            hsla(0, 0%, 0%, 0.556) 35.3%,
-            hsla(0, 0%, 0%, 0.486) 41.2%,
-            hsla(0, 0%, 0%, 0.412) 47.1%,
-            hsla(0, 0%, 0%, 0.338) 52.9%,
-            hsla(0, 0%, 0%, 0.264) 58.8%,
-            hsla(0, 0%, 0%, 0.194) 64.7%,
-            hsla(0, 0%, 0%, 0.132) 71%,
-            hsla(0, 0%, 0%, 0.078) 77.5%,
-            hsla(0, 0%, 0%, 0.036) 84.5%,
-            hsla(0, 0%, 0%, 0.01) 91.9%,
-            hsla(0, 0%, 0%, 0) 100%
-          );`
+        width: '100%'
 
     }
     

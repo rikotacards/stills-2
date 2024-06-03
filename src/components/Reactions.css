@@ -1,0 +1,19 @@
+.div-container {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    display: flex;
+    scrollbar-width: 0;
+    overflow-x: scroll;
+   
+}
+.div {
+    overflow: hidden;
+    display: flex;
+    flex-direction: row;
+    background: linear-gradient(
+        to right, 
+        rgba(0, 0, 0, 0) 0%,
+        rgb(6, 6, 6) 100%
+     );  
+}

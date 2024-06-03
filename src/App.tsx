@@ -38,10 +38,10 @@ const darkTheme = createTheme({
   },
   palette: {
     mode: 'dark',
-    // background: {
-    //   default: '#000',
-    //   paper: '#000'
-    // }
+    background: {
+      default: '#000',
+      paper: '#000'
+    }
   },
 });
 

@@ -1,4 +1,4 @@
-import { Avatar, Box, Button, Chip, Typography } from '@mui/material';
+import { Avatar, Box, Button, Chip, IconButton, Typography } from '@mui/material';
 import React from 'react';
 import { addReaction, removeReaction } from '../firebase/reactions';
 import { UID } from '../firebase/firebaseConfig';
@@ -7,15 +7,19 @@ import { deletePost } from '../firebase/post';
 import { Slides } from './Slides';
 import { useDrawerContext } from '../providers/DrawerProvider';
 import { EditPost } from './EditPost';
+import AddReactionIcon from '@mui/icons-material/AddReaction';
+import ChatBubbleIcon from '@mui/icons-material/ChatBubble';
+import { FieldValue, Timestamp } from 'firebase/firestore';
 
 interface PostProps {
     slides: { imagePath: string; caption: string }[];
     authorId: string;
     postId: string;
+    createdAt: Timestamp;
 }
 
 const postContainerStyles = {
-    mb: 1,
+    mb: 2,
     maxWidth: 470,
     //without this, image will overflow
     width: '100%',
@@ -25,7 +29,7 @@ const postContainerStyles = {
     flexDirection: 'column',
     // border: '1px solid white',
 }
-export const Post: React.FC<PostProps> = ({ postId, slides, authorId }) => {
+export const Post: React.FC<PostProps> = ({ createdAt, postId, slides, authorId }) => {
     const drawerContext = useDrawerContext();
     const onAddReaction = async () => {
         addReaction({
@@ -43,24 +47,25 @@ export const Post: React.FC<PostProps> = ({ postId, slides, authorId }) => {
             emojiId: 'heart',
         })
     }
-    
+
     return (
         <Box sx={postContainerStyles}>
-            
-            <Slides postId={postId} slides={slides} />
-     
-            {/* <Button size='small' variant='contained'>comments</Button>
-            <Button size='small' onClick={onAddReaction} variant='contained'>Heart</Button>
-            <Button size='small' variant='contained'>fire</Button>
-            <Button size='small' variant='contained'>Add comment</Button>
-            <Button size='small' onClick={onRemoveReaction} variant='contained'>Remove Heart</Button> */}
-            <Reactions postId={postId} />
-            <Box>
 
-           
+            <Slides postId={postId} slides={slides} >
+            </Slides>
+
+            {/* <Button size='small' onClick={onAddReaction} variant='contained'>Heart</Button>
+            <Button size='small' onClick={onRemoveReaction} variant='contained'>Remove Heart</Button>  */}
+            <Box sx={{ display: 'flex', ml: 1, mt: 1 }}>
+                <Typography variant='caption' color='GrayText'>
+
+                    {createdAt.toDate().toLocaleDateString("en-US", {month:'short', day: 'numeric', year: 'numeric'})}
+
+
+                </Typography>
+
+
             </Box>
-
-
 
         </Box>
     )

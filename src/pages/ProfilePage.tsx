@@ -25,7 +25,7 @@ export const ProfilePage: React.FC = () => {
             {/* <Button variant='contained' size='small' onClick={() => follow({myUid: UID, otherUid: 'michael'})}>Follow</Button> */}
             {isFetching && <CircularProgress/>}
 
-            {posts?.map((d) => <Post postId={d.id} key={d.id} authorId={d.authorID} slides={d.slides} />)}
+            {posts?.map((d) => <Post createdAt={d.createdAt} postId={d.id} key={d.id} authorId={d.authorID} slides={d.slides} />)}
             <Toolbar/>
         </>
     )

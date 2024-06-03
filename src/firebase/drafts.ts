@@ -1,4 +1,4 @@
-import {  updateDoc, deleteDoc, getDocs, doc, addDoc, collection, serverTimestamp, FieldValue } from "firebase/firestore";
+import {  updateDoc, deleteDoc, getDocs, doc, addDoc, collection, serverTimestamp, FieldValue, Timestamp } from "firebase/firestore";
 import { UID, db } from "./firebaseConfig";
 import { NewPostProps } from "./post";
 
@@ -31,7 +31,7 @@ export const updateDraft = async (draftId: string, update: { caption: string, im
 
 export interface PostResponse {
     authorID: string;
-    createdAt: FieldValue;
+    createdAt: Timestamp;
     id: string;
     slides: {caption: string, imagePath: string}[]
 }

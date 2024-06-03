@@ -1,3 +1,4 @@
+
 import { Box, Chip, IconButton } from '@mui/material';
 import React from 'react';
 import { Caption } from './Caption';
@@ -7,17 +8,20 @@ import { MoreVert } from '@mui/icons-material';
 import 'swiper/css';
 import 'swiper/css/effect-fade';
 import 'swiper/css/navigation';
-
+import './Slides.css'
 import 'swiper/css/controller';
 interface SlidesProps {
     slides: { imagePath: string, caption: string }[]
     postId: string;
+    children?: React.ReactNode
 }
 // image conforms to parent div
 const imageStyles = {
     height: '600px',
     width: '100%',
     display: 'flex',
+    marginLeft: 'auto',
+   
     objectFit: 'cover',
     position: 'relative'
 
@@ -25,35 +29,16 @@ const imageStyles = {
 import { EditPost } from './EditPost';
 import { useDrawerContext } from '../providers/DrawerProvider';
 import { AuthorHeader } from './AuthorHeader';
-import AddReactionIcon from '@mui/icons-material/AddReaction';
-import ChatBubbleIcon from '@mui/icons-material/ChatBubble';
+import { Reactions } from './Reactions';
 const swiperContainer = { display: 'flex', flexDirection: 'row' }
-export const Slides: React.FC<SlidesProps> = ({ slides, postId }) => {
+export const Slides: React.FC<SlidesProps> = ({ children, slides, postId }) => {
     const [firstSwiper, setFirstSwiper] = React.useState(null);
     const [secondSwiper, setSecondSwiper] = React.useState(null);
     const drawerContext = useDrawerContext();
     const boxStyle = {
         pt: 1,
-        pb:1,
-        background: `linear-gradient(
-            to bottom,
-      hsla(0, 0%, 0%, 0) 0%,
-      hsla(0, 0%, 0%, 0.012) 3.6%,
-      hsla(0, 0%, 0%, 0.044) 6.9%,
-      hsla(0, 0%, 0%, 0.095) 10%,
-      hsla(0, 0%, 0%, 0.16) 13.2%,
-      hsla(0, 0%, 0%, 0.236) 16.6%,
-      hsla(0, 0%, 0%, 0.32) 20.4%,
-      hsla(0, 0%, 0%, 0.41) 24.7%,
-      hsla(0, 0%, 0%, 0.5) 29.8%,
-      hsla(0, 0%, 0%, 0.59) 35.7%,
-      hsla(0, 0%, 0%, 0.674) 42.7%,
-      hsla(0, 0%, 0%, 0.75) 51%,
-      hsla(0, 0%, 0%, 0.815) 60.7%,
-      hsla(0, 0%, 0%, 0.866) 72%,
-      hsla(0, 0%, 0%, 0.898) 85%,
-      hsla(0, 0%, 0%, 0.91) 100%
-          );`
+        pb: 1,
+
 
 
     }
@@ -79,7 +64,6 @@ export const Slides: React.FC<SlidesProps> = ({ slides, postId }) => {
         <Box
 
             key={s.caption + i}
-        // style={{ display: 'flex', flexDirection: 'column' }}
         >
 
 
@@ -92,6 +76,8 @@ export const Slides: React.FC<SlidesProps> = ({ slides, postId }) => {
         drawerContext.setComponent(<EditPost postId={postId} />)
         drawerContext.onOpen();
     }
+   
+
     return (
         <Box sx={{
             position: 'relative',
@@ -99,8 +85,8 @@ export const Slides: React.FC<SlidesProps> = ({ slides, postId }) => {
             //  width: '100%', 
             flexDirection: 'column'
         }}>
-            <Box sx={{ width: '100%', position: 'absolute', top: 0, zIndex: 2, display: 'flex', alignItems: 'center' }}>
-                <IconButton sx={{ml:'auto'}} onClick={onMoreClick} ><MoreVert /></IconButton>
+            <Box sx={{pr:1, width: '100%', position: 'absolute', top: 0, zIndex: 2, display: 'flex', alignItems: 'center' }}>
+                <IconButton sx={{ ml: 'auto' }} onClick={onMoreClick} ><MoreVert /></IconButton>
                 <Chip size='small' sx={{ backdropFilter: 'blur(2px)' }} label={`${page}/${slides.length}`} />
             </Box>
             <Box sx={swiperContainer}>
@@ -125,19 +111,27 @@ export const Slides: React.FC<SlidesProps> = ({ slides, postId }) => {
                >
 
                </Swiper> */}
-                <Box sx={boxStyle}>
+                <Box sx={{ boxStyle }} className={slides[page-1].caption.length === 0 ? undefined : 'bottom'}>
 
-                    <AuthorHeader authorId='max' />
+                    <AuthorHeader postId={postId} authorId='max' />
+                    <Box sx={{ display: 'flex', alignItems: 'center', mb:1 }}>
+                        <Box>
 
-                    {displayedCaptions[page - 1]}
-                <Box sx={{ml:1, mb:1}}>
-                    <Chip sx={{mr:1}} size='small' label='good'/>
-                    <Chip sx={{mr:1}} size='small' label='Bad'/>
-                    <Chip sx={{mr:1}} size='small' label='Lol'/>
-                    <Chip sx={{mr:1}} size='small' icon={<AddReactionIcon fontSize='small'/>} />
-                    <IconButton size='small'><AddReactionIcon fontSize='small'/></IconButton>
-                    <IconButton size='small'><ChatBubbleIcon fontSize='small'/></IconButton>
-                </Box>
+                            {displayedCaptions[page - 1]}
+                        </Box>
+                        {/* <IconButton sx={{ml: 'auto', mr:1}} onClick={onCommentsClick} size='small'><ChatBubbleOutlineIcon fontSize='small' /></IconButton> */}
+                    </Box>
+
+
+                    <Box sx={{ ml: 1, mb: 0, display: 'flex', mr: 1, alignItems: 'center' }}>
+{false &&                        <Reactions postId={postId} />}
+                        <Box sx={{ ml: 'auto', display: 'flex' }}>
+
+                            {/* <IconButton onClick={onReactionClick} size='small'><AddReactionIcon fontSize='small' /></IconButton>
+                            <IconButton onClick={onCommentsClick} size='small'><ChatBubbleIcon fontSize='small' /></IconButton> */}
+                        </Box>
+                    </Box>
+                    {children}
                 </Box>
             </Box>
         </Box>
