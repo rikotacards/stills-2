@@ -3,38 +3,53 @@ import React from 'react';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 interface CommentsProps {
     postId: string
+    postAuthorId: string
 }
 import ArrowDropUpIcon from '@mui/icons-material/ArrowDropUp';
-export const Comments: React.FC<CommentsProps> = ({ postId }) => {
+import { UID } from '../firebase/firebaseConfig';
+import { addComment } from '../firebase/comments';
+import { AllComments } from './AllComments';
+import { useDrawerContext } from '../providers/DrawerProvider';
+export const Comments: React.FC<CommentsProps> = ({ postId, postAuthorId }) => {
+    const [comment, setComment] = React.useState('')
+    const d = useDrawerContext();
+    const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setComment(e.target.value)
+    }
+    const onAddComment = async() => {
+       await addComment( {comment, 
+        postAuthorId,
+        postId, 
+        commentAuthorId: UID})
+    }
     return (
         <Box sx={{ postion: 'relative' }}>
             <AppBar position='absolute'>
                 <Toolbar>
                     <Typography>Comments</Typography>
-                    <IconButton sx={{ ml: 'auto' }}><KeyboardArrowDownIcon /></IconButton>
+                    <IconButton onClick={d.onClose} sx={{ ml: 'auto' }}><KeyboardArrowDownIcon /></IconButton>
                 </Toolbar>
             </AppBar>
             <Toolbar />
             <Box sx={{ p: 1 }}>
                 <Card variant='outlined' sx={{p:1, mb:1, textAlign: 'center'}}>
-
-                <Typography>No comments</Typography>
+                <AllComments postId={postId} postAuthorId={postAuthorId}/>
                 </Card>
                 <Box sx={{ display: 'flex', alignItems: 'center' }}>
 
                     <Avatar></Avatar>
                     <TextField
+                    onChange={onChange}
+                    value={comment}
                         size='small'
 
                         InputProps={{
                             endAdornment:
                                 <InputAdornment
-                                    position='end'><Button sx={{ borderRadius: 1 }}
-                                        variant='contained'
-                                        size='small'
+                                    position='end'><IconButton  onClick={onAddComment} size='small' sx={{ border: '1px solid' }}
                                         color='primary'>
-                                        <ArrowDropUpIcon />
-                                    </Button ></InputAdornment>
+                                        <ArrowDropUpIcon fontSize='small' />
+                                    </IconButton ></InputAdornment>
                         }}
                         sx={{ ml: 1, pr: 0 }}
                         fullWidth />

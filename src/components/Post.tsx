@@ -50,7 +50,7 @@ export const Post: React.FC<PostProps> = ({ createdAt, postId, slides, authorId 
     return (
         <Box sx={postContainerStyles}>
 
-            <Slides postId={postId} slides={slides}/>
+            <Slides authorId={authorId} postId={postId} slides={slides}/>
 
             {/* <Button size='small' onClick={onAddReaction} variant='contained'>Heart</Button>
             <Button size='small' onClick={onRemoveReaction} variant='contained'>Remove Heart</Button>  */}

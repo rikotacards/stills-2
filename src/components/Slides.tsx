@@ -14,24 +14,16 @@ interface SlidesProps {
     slides: { imagePath: string, caption: string }[]
     postId: string;
     children?: React.ReactNode
+    authorId?: string;
 }
-// image conforms to parent div
-const imageStyles = {
-    height: '600px',
-    width: '100%',
-    display: 'flex',
-    marginLeft: 'auto',
-    objectFit: 'cover',
-    position: 'relative'
 
-}
 import { EditPost } from './EditPost';
 import { useDrawerContext } from '../providers/DrawerProvider';
 import { AuthorHeader } from './AuthorHeader';
 import { Reactions } from './Reactions';
 import { ImageWithLoading } from './ImageWithLoading';
 const swiperContainer = { display: 'flex', flexDirection: 'row' }
-export const Slides: React.FC<SlidesProps> = ({ children, slides, postId }) => {
+export const Slides: React.FC<SlidesProps> = ({authorId, slides, postId }) => {
     const [firstSwiper, setFirstSwiper] = React.useState(null);
     const [secondSwiper, setSecondSwiper] = React.useState(null);
     const drawerContext = useDrawerContext();
@@ -82,9 +74,9 @@ export const Slides: React.FC<SlidesProps> = ({ children, slides, postId }) => {
             flexDirection: 'column',
 
         }}>
-            <Box sx={{pr:1, width: '100%', position: 'absolute', top: 0, zIndex: 2, display: 'flex', alignItems: 'center' }}>
-                <IconButton sx={{ ml: 'auto' }} onClick={onMoreClick} ><MoreVert /></IconButton>
-                <Chip size='small' sx={{ backdropFilter: 'blur(2px)' }} label={`${page}/${slides.length}`} />
+            <Box sx={{mt:1, pr:1, width: '100%', position: 'absolute', top: 0, zIndex: 2, display: 'flex', alignItems: 'center' }}>
+                <Chip size='medium' sx={{ ml:'auto', backdropFilter: 'blur(10px)', background: 'transparent' }} label={`${page}/${slides.length}`} />
+                <IconButton  onClick={onMoreClick} ><MoreVert /></IconButton>
             </Box>
             <Box sx={swiperContainer}>
                 <Swiper
@@ -110,7 +102,7 @@ export const Slides: React.FC<SlidesProps> = ({ children, slides, postId }) => {
                </Swiper> */}
                 <Box sx={{ boxStyle }} className={slides?.[page-1]?.caption?.length === 0 ? undefined : 'bottom'}>
 
-                    <AuthorHeader postId={postId} authorId='max' />
+                    <AuthorHeader postId={postId} authorId={authorId || ''} />
                     <Box sx={{ display: 'flex', alignItems: 'center', mb:1 }}>
                         <Box>
 

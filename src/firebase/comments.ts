@@ -1,4 +1,4 @@
-import { deleteDoc, getDocs, doc, addDoc, collection, serverTimestamp} from "firebase/firestore";
+import { deleteDoc, getDocs, doc, addDoc, collection, serverTimestamp, Timestamp} from "firebase/firestore";
 import {  db } from "./firebaseConfig";
 import { PostResponse } from "./drafts";
 
@@ -35,12 +35,18 @@ interface GetCommentsProps {
     postAuthorId: string;
     postId: string
 }
+export interface CommentsReponse {
+    createdAt: Timestamp;
+    commentAuthorId: string;
+    comment: string;
+    id: string
+}
 export const getComments = async (args: GetCommentsProps) => {
     try {
-        const querySnapshot = await getDocs(collection(db, "users", args.postAuthorId, "posts", args.postId))
-        const res: PostResponse[] = [];
+        const querySnapshot = await getDocs(collection(db, "users", args.postAuthorId, "posts", args.postId, "comments"))
+        const res: CommentsReponse[] = [];
         querySnapshot.forEach((d) => {
-            res.push({ ...d.data(), id: d.id } as PostResponse)
+            res.push({ ...d.data(), id: d.id } as CommentsReponse)
         })
         return res
     } catch (e) {

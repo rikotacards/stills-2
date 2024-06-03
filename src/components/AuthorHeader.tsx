@@ -24,7 +24,7 @@ export const AuthorHeader: React.FC<AuthorHeaderProps> = ({ postId, authorId }) 
     const open = Boolean(anchorEl);
     const id = open ? 'simple-popover' : undefined;
     const onCommentsClick = () => {
-        drawerContext.setComponent(<Comments postId={postId} />)
+        drawerContext.setComponent(<Comments postAuthorId={authorId} postId={postId} />)
         drawerContext.onOpen();
     }
     const onReactionClick = () => {
