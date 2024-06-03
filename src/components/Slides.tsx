@@ -21,7 +21,6 @@ const imageStyles = {
     width: '100%',
     display: 'flex',
     marginLeft: 'auto',
-   
     objectFit: 'cover',
     position: 'relative'
 
@@ -30,6 +29,7 @@ import { EditPost } from './EditPost';
 import { useDrawerContext } from '../providers/DrawerProvider';
 import { AuthorHeader } from './AuthorHeader';
 import { Reactions } from './Reactions';
+import { ImageWithLoading } from './ImageWithLoading';
 const swiperContainer = { display: 'flex', flexDirection: 'row' }
 export const Slides: React.FC<SlidesProps> = ({ children, slides, postId }) => {
     const [firstSwiper, setFirstSwiper] = React.useState(null);
@@ -52,11 +52,7 @@ export const Slides: React.FC<SlidesProps> = ({ children, slides, postId }) => {
             key={i}
         >
 
-            <Box onLoadedData={() => { console.log('STARTL') }}
-                onLoad={() => { console.log('LOD') }}
-                component='img'
-                sx={imageStyles}
-                src={s.imagePath} />
+            <ImageWithLoading imagePath={s.imagePath}/>
 
         </SwiperSlide>
     )
