@@ -32,7 +32,12 @@ export const DrawerProvider: React.FC<DrawerProviderProps> = ({children}) => {
     return (
         <DrawerContext.Provider value={value}>
             {children}
-            <Drawer anchor='bottom' onClose={onClose} open={open}>
+            <Drawer 
+            anchor='bottom'
+            hideBackdrop
+            // PaperProps={{backgroundColor: 'blue'}}
+             onClose={onClose} 
+             open={open}>
                 {render}
             </Drawer>
         </DrawerContext.Provider>

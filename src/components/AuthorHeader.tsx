@@ -6,7 +6,7 @@ import ChatBubbleOutlineIcon from '@mui/icons-material/ChatBubbleOutline';
 import { useDrawerContext } from '../providers/DrawerProvider';
 import { Comments } from './Comments';
 import { QuickReactions } from './QuickReactions';
-
+import MessageIcon from '@mui/icons-material/Message';
 interface AuthorHeaderProps {
     authorId: string;
     postId: string;
@@ -38,7 +38,24 @@ export const AuthorHeader: React.FC<AuthorHeaderProps> = ({ postId, authorId }) 
                 {authorId || 'maxwelldhsu'}
             </Typography>
 
-            <IconButton
+           
+            <Box sx={{ ml: 'auto' }}>
+
+
+                <Chip
+                    onClick={onCommentsClick}
+                    label={<Box sx={{ alignItems: 'center', display: 'flex' }}>
+                        <MessageIcon sx={{ mr:0.5 }} fontSize='small' /> 45</Box>}
+                    sx={{
+                        backdropFilter: 'blur(11px)',
+                        background: 'transparent',
+                        // boxShadow: '0 0 1px #000',
+                        border: '0px solid grey',
+                        alignItems: 'center',
+                        mr:1
+
+                    }} size='small'></Chip>
+                <IconButton
                 onClick={onReactionClick}
                 sx={{
                     ml: 'auto',
@@ -49,13 +66,7 @@ export const AuthorHeader: React.FC<AuthorHeaderProps> = ({ postId, authorId }) 
 
                 }}
                 size='small'><AddReactionIcon fontSize='small' /></IconButton>
-            <IconButton
-                onClick={onCommentsClick}
-                sx={{
-                    backdropFilter: 'blur(11px)',
-                    // boxShadow: '0 0 1px #000',
-                    border: '0px solid grey'
-                }} size='small'><ChatBubbleOutlineIcon fontSize='small' /></IconButton>
+            </Box>
         </Box>
     )
 }

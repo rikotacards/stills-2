@@ -10,6 +10,8 @@ import { AddNewPostSteps } from './components/AddNewPostSteps';
 import { Layout } from './components/Layout';
 import { DraftsPage } from './pages/DraftsPage';
 import { ProfilePage } from './pages/ProfilePage';
+import { DrawerProvider } from './providers/DrawerProvider';
+import { NewPostProvider } from './providers/NewPostProvider';
 
 const router = createBrowserRouter([
   {
@@ -51,7 +53,13 @@ function App() {
     <>
       <ThemeProvider theme={darkTheme}>
         <CssBaseline />
+        <NewPostProvider>
+
+        <DrawerProvider>
+
         <RouterProvider router={router} />
+        </DrawerProvider>
+        </NewPostProvider>
       </ThemeProvider>
 
     </>

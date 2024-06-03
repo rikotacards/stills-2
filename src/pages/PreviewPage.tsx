@@ -7,17 +7,21 @@ import { serverTimestamp } from 'firebase/firestore';
 interface PreviewPageProps {
     onBack: () => void;
 }
+
 export const PreviewPage: React.FC<PreviewPageProps> = ({onBack}) => {
     const {onSaveDraft, slidesWithImageAndCaption, onPost} = useNewPostContext();
     const slidesWithImageURL = slidesWithImageAndCaption.map((slide) => ({...slide, imagePath: slide.imagePath?.length ? URL.createObjectURL(slide.imagePath[0]): ''}))
     console.log(slidesWithImageURL)
+    const style = {
+        mb:1
+    }
     return (
         <>
         <Post postId={'fake'} authorId={UID} slides={slidesWithImageURL}/>
-        <Button onClick={onBack}>Back</Button>
-        <Button>Cancel</Button>
-        <Button onClick={onPost}>Post</Button>
-        <Button onClick={onSaveDraft}>Save as draft</Button>
+        <Button sx={style} fullWidth onClick={onBack}>Back</Button>
+        <Button sx={style} fullWidth>Cancel</Button>
+        <Button sx={style} fullWidth onClick={onPost}>Post</Button>
+        <Button sx={style} fullWidth onClick={onSaveDraft}>Save as draft</Button>
         </>
     )
 }

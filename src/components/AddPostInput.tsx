@@ -1,4 +1,4 @@
-import { Box, IconButton, TextField } from '@mui/material';
+import { Box, Card, IconButton, TextField } from '@mui/material';
 import React from 'react';
 import { useNewPostContext } from '../providers/useNewPostContext';
 interface AddPostInputProps {
@@ -16,13 +16,14 @@ interface DragItem {
     type: string
 }
 const style = {
-    border: '1px solid gray',
-    padding: '0.5rem 1rem',
-    marginBottom: '.5rem',
     cursor: 'move',
+    display: 'flex',
+    width: '100%',
+    mb:1,
 }
 import DragIndicatorIcon from '@mui/icons-material/DragIndicator';
 import { AddImage } from './AddImage';
+import { useIsNarrow } from '../utils/useIsNarrow';
 export const AddPostInput: React.FC<AddPostInputProps> = ({ id, index, moveSlide }) => {
     const { deleteInput, onCaptionChange, captions } = useNewPostContext();
     const ref = React.useRef<HTMLDivElement>(null)
@@ -100,25 +101,38 @@ export const AddPostInput: React.FC<AddPostInputProps> = ({ id, index, moveSlide
         }),
     })
 
-    const opacity = isDragging ? 0 : 1
     drag(drop(ref))
+    const isNarrow = useIsNarrow();
     return (
-        <div ref={ref} data-handler-id={handlerId} style={{ ...style, opacity }}>
+        <Box ref={ref} data-handler-id={handlerId} sx={{
+            cursor: 'move',
+            display: 'flex',
+            width: '100%',
+            mb:1,
+             opacity : isDragging ? 0 : 1
 
-            <Box sx={{ display: 'flex', alignItems: 'center' }}>
-                <Box mr={0}>
+        }}>
+
+            <Card  variant='outlined' sx={{width:'100%', padding: 1, display: 'flex', alignItems: 'center' }}>
                     <DragIndicatorIcon />
-                </Box>
                 <AddImage slideId={id} />
 
-                <Box>
-                    <TextField value={captions[id]} onChange={(e) => onCaptionChange(e, id)} multiline />
+                <Box sx={{display: 'flex', width: '100%'}}>
+                    <TextField 
+                    fullWidth
+                    placeholder='Write your caption'
+                    rows={isNarrow? 2 : 5}
+                    value={captions[id]} 
+                    sx={{height: '100%'}}
+                    onChange={(e) => onCaptionChange(e, id)}
+                     multiline 
+                     />
                 </Box>
-               {index !== 0 && <IconButton onClick={() => deleteInput(index, id)}>
+                { <IconButton sx={{ml:1, visibility: index !== 0 ? 'visible': 'hidden'}} size='small' onClick={() => deleteInput(index, id)}>
                     <ClearIcon />
                 </IconButton>}
 
-            </Box>
-        </div>
+            </Card>
+        </Box>
     )
 }

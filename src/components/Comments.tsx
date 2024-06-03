@@ -1,4 +1,4 @@
-import { AppBar, Avatar, Box, TextField, Toolbar, Typography, IconButton, Input, InputAdornment, Button } from '@mui/material';
+import { AppBar, Avatar, Box, TextField, Toolbar, Typography, IconButton, Input, InputAdornment, Button, Card } from '@mui/material';
 import React from 'react';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 interface CommentsProps {
@@ -8,7 +8,7 @@ import ArrowDropUpIcon from '@mui/icons-material/ArrowDropUp';
 export const Comments: React.FC<CommentsProps> = ({ postId }) => {
     return (
         <Box sx={{ postion: 'relative' }}>
-            <AppBar color='primary' enableColorOnDark position='absolute'>
+            <AppBar position='absolute'>
                 <Toolbar>
                     <Typography>Comments</Typography>
                     <IconButton sx={{ ml: 'auto' }}><KeyboardArrowDownIcon /></IconButton>
@@ -16,14 +16,28 @@ export const Comments: React.FC<CommentsProps> = ({ postId }) => {
             </AppBar>
             <Toolbar />
             <Box sx={{ p: 1 }}>
+                <Card variant='outlined' sx={{p:1, mb:1, textAlign: 'center'}}>
 
                 <Typography>No comments</Typography>
+                </Card>
                 <Box sx={{ display: 'flex', alignItems: 'center' }}>
 
                     <Avatar></Avatar>
-                    <TextField size='small'  InputProps={{
-                        endAdornment: <InputAdornment position='end'><Button sx={{borderRadius:5}} variant='contained' size='small' color='primary'><ArrowDropUpIcon /></Button ></InputAdornment>
-                    }} sx={{ ml: 1 }} fullWidth />
+                    <TextField
+                        size='small'
+
+                        InputProps={{
+                            endAdornment:
+                                <InputAdornment
+                                    position='end'><Button sx={{ borderRadius: 1 }}
+                                        variant='contained'
+                                        size='small'
+                                        color='primary'>
+                                        <ArrowDropUpIcon />
+                                    </Button ></InputAdornment>
+                        }}
+                        sx={{ ml: 1, pr: 0 }}
+                        fullWidth />
 
                 </Box>
             </Box>

@@ -1,5 +1,5 @@
 import React from 'react';
-import { IconButton } from '@mui/material';
+import { Box, IconButton } from '@mui/material';
 import AddPhotoAlternateIcon from '@mui/icons-material/AddPhotoAlternate';
 import { useNewPostContext } from '../providers/useNewPostContext';
 
@@ -28,13 +28,17 @@ export const AddImage: React.FC<AddImageProps> = ({ slideId }) => {
         <>
             {!imagePaths[slideId]?.length && <IconButton
                 onClick={onUploadIconClick}><AddPhotoAlternateIcon /></IconButton>}
-            {imagePaths[slideId]?.length && <img
-                style={{
+            {imagePaths[slideId]?.length && <Box
+                sx={{
                     width: 100,
-                    height: 100
+                    height: 100,
+                    mr: 1,
+                    objectFit: 'cover'
                 }}
+                component='img'
                 onClick={onUploadIconClick}
-                src={previewUrl} />}
+                src={previewUrl}
+            />}
             <input type="file"
                 style={{ display: "none" }}
                 ref={inputRef}

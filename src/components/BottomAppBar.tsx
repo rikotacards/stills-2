@@ -4,6 +4,7 @@ import AddIcon from '@mui/icons-material/Add';
 import { useNavigate } from 'react-router';
 import { useDrawerContext } from '../providers/DrawerProvider';
 import { AddNewPostSteps } from './AddNewPostSteps';
+import { AddNewPostNarrow } from './AddNewPostNarrow';
 
 export const BottomAppBar: React.FC = () => {
     const nav = useNavigate();
@@ -12,7 +13,7 @@ export const BottomAppBar: React.FC = () => {
         nav('/create')
     }
     const onCreateDrawer = () => {
-        drawerContext.setComponent(<AddNewPostSteps/>)
+        drawerContext.setComponent(<AddNewPostNarrow/>)
         drawerContext.onOpen()
     }
     return (
