@@ -6,6 +6,7 @@ import { useDrawerContext } from '../providers/DrawerProvider';
 import { Comments } from './Comments';
 import { QuickReactions } from './QuickReactions';
 import MessageIcon from '@mui/icons-material/Message';
+import { PopoverReactions } from './PopoverReactions';
 interface AuthorHeaderProps {
     authorId: string;
     postId: string;
@@ -66,7 +67,7 @@ export const AuthorHeader: React.FC<AuthorHeaderProps> = ({ postId, authorId }) 
                     }} size='small'></Chip>
                 <IconButton
                 
-                    onClick={onReactionClick}
+                    onClick={handleClick}
                     sx={{
                         ml: 'auto',
                         mr: 1,
@@ -94,7 +95,7 @@ export const AuthorHeader: React.FC<AuthorHeaderProps> = ({ postId, authorId }) 
                   }}
 
             >
-                <QuickReactions/>
+                <PopoverReactions handleClose={handleClose}/>
                 </Popover>
         </Box>
     )

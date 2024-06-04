@@ -4,23 +4,9 @@ interface ImageWithLoadingProps {
     imagePath: string;
 }
 // image conforms to parent div
-const imageStyles = {
-    height: '600px',
-    width: '100%',
-    display: 'flex',
-    marginLeft: 'auto',
-    objectFit: 'cover',
-    position: 'relative'
-}
+
 export const ImageWithLoading: React.FC<ImageWithLoadingProps> = ({ imagePath }) => {
-    const imageStyles = {
-        height: '600px',
-        width: '100%',
-        display: '',
-        marginLeft: 'auto',
-        objectFit: 'cover',
-        position: 'relative',
-    }
+   
     const [isLoading, setLoading] = React.useState(true);
     return (
         <>
