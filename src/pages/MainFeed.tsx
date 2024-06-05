@@ -1,23 +1,18 @@
-import { Box, Button, CircularProgress, Toolbar, Typography } from '@mui/material';
+import { Button, CircularProgress, Toolbar } from '@mui/material';
 import React from 'react';
 import { PostResponse } from '../firebase/drafts';
 import { getPosts } from '../firebase/post';
 import { UID } from '../firebase/firebaseConfig';
 import { Post } from '../components/Post';
-import { useAuth0 } from "@auth0/auth0-react";
 import { useTopAppBarContext } from '../providers/useTopAppBarContext';
-import { TopAppBarProfile } from '../components/TopAppBarProfile';
 
-export const ProfilePage: React.FC = () => {
+export const MainFeed: React.FC = () => {
     const [posts, setPosts] = React.useState<PostResponse[]>([])
     const [isFetching, setFetching] = React.useState(false)
-    const {setComponent} = useTopAppBarContext();
-    const { user, isAuthenticated, isLoading} = useAuth0();
-    
+    const topAppBarContext = useTopAppBarContext();
     React.useEffect(() => {
-        setComponent(<TopAppBarProfile/>)
-    }, [setComponent])
-    
+        topAppBarContext.setComponent(null)
+    }, [topAppBarContext])
     React.useEffect(() => {
         setFetching(true)
         getPosts(false, UID).then((res) => {
@@ -31,6 +26,7 @@ export const ProfilePage: React.FC = () => {
 
     return (
         <>
+        <Toolbar/>
             {isFetching && <CircularProgress/>}
 
             {posts?.map((d) => <Post createdAt={d.createdAt} postId={d.id} key={d.id} authorId={d.authorID} slides={d.slides} />)}

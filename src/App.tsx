@@ -13,27 +13,32 @@ import { ProfilePage } from './pages/ProfilePage';
 import { DrawerProvider } from './providers/DrawerProvider';
 import { NewPostProvider } from './providers/NewPostProvider';
 import { AccountPage } from './pages/AccountPage';
-
+import { Auth0Provider } from '@auth0/auth0-react';
+import { MainFeed } from './pages/MainFeed';
 const router = createBrowserRouter([
   {
     path: '/',
-    element: <><Layout/></>,
+    element: <><Layout /></>,
     children: [
       {
         path: '',
-        element: <ProfilePage/>
+        element: <MainFeed />
       },
       {
         path: '/create',
-        element: <AddNewPostSteps/>
+        element: <AddNewPostSteps />
       },
       {
         path: '/drafts',
-        element: <DraftsPage/>
+        element: <DraftsPage />
       },
       {
         path: '/account',
-        element: <AccountPage/>
+        element: <AccountPage />
+      },
+      {
+        path: '/profile',
+        element: <ProfilePage />
       }
     ]
   }
@@ -58,13 +63,21 @@ function App() {
     <>
       <ThemeProvider theme={darkTheme}>
         <CssBaseline />
+        <Auth0Provider
+         domain="dev-l5gnjo4j.us.auth0.com"
+         clientId="ZDJz6vicTNMhGedZoBiSURahbJ3bznup"
+         authorizationParams={{
+           redirect_uri: window.location.origin
+         }}
+        >
         <NewPostProvider>
 
-        <DrawerProvider>
+          <DrawerProvider>
 
-        <RouterProvider router={router} />
-        </DrawerProvider>
+            <RouterProvider router={router} />
+          </DrawerProvider>
         </NewPostProvider>
+        </Auth0Provider>
       </ThemeProvider>
 
     </>
