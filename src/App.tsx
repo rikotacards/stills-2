@@ -14,6 +14,7 @@ import { DrawerProvider } from './providers/DrawerProvider';
 import { NewPostProvider } from './providers/NewPostProvider';
 import { AccountPage } from './pages/AccountPage';
 import { Auth0Provider } from '@auth0/auth0-react';
+import { MainFeed } from './pages/MainFeed';
 const router = createBrowserRouter([
   {
     path: '/',
@@ -21,7 +22,7 @@ const router = createBrowserRouter([
     children: [
       {
         path: '',
-        element: <ProfilePage />
+        element: <MainFeed />
       },
       {
         path: '/create',
@@ -34,6 +35,10 @@ const router = createBrowserRouter([
       {
         path: '/account',
         element: <AccountPage />
+      },
+      {
+        path: '/profile',
+        element: <ProfilePage />
       }
     ]
   }
