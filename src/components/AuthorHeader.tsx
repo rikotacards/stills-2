@@ -52,10 +52,10 @@ export const AuthorHeader: React.FC<AuthorHeaderProps> = ({ postId, authorId }) 
             <Box sx={{ ml: 'auto' }}>
 
 
-                <Chip
+                {/* <Chip
                     onClick={onCommentsClick}
                     label={<Box sx={{ alignItems: 'center', display: 'flex' }}>
-                        <MessageIcon sx={{ mr: 0.5 }} fontSize='small' /> 45</Box>}
+                        <MessageIcon sx={{ mr: 0.5 }} fontSize='small' /></Box>}
                     sx={{
                         backdropFilter: 'blur(11px)',
                         background: 'transparent',
@@ -64,7 +64,10 @@ export const AuthorHeader: React.FC<AuthorHeaderProps> = ({ postId, authorId }) 
                         alignItems: 'center',
                         mr: 1
 
-                    }} size='small'></Chip>
+                    }} size='small'></Chip> */}
+                    <IconButton sx={{mr:1}} size='small'>
+                        <MessageIcon fontSize='small'/>
+                    </IconButton>
                 <IconButton
                 
                     onClick={handleClick}

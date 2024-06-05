@@ -1,4 +1,4 @@
-import { deleteDoc, doc, serverTimestamp, setDoc } from "firebase/firestore"
+import { deleteDoc, doc, getDoc, serverTimestamp, setDoc } from "firebase/firestore"
 import { db } from "./firebaseConfig"
 
 export const follow = async (args: {myUid: string, otherUid: string}) => {
@@ -25,6 +25,20 @@ export const unfollow = async (args: {myUid: string, otherUid: string}) => {
     try {
      await setDoc(doc(db, "users", args.myUid), {bio: args.bio}, {merge: true})
  
+ } catch (e){
+     alert(e)
+    }
+ }
+ export interface UserFieldsResponse {
+    isPrivate: boolean;
+    bio: string;
+ }
+ export const getBio = async (myUid: string) => {
+    try {
+     const res = await getDoc(doc(db, "users", myUid))
+        if(res.exists()){
+            return res.data() as UserFieldsResponse
+        }
  } catch (e){
      alert(e)
     }

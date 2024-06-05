@@ -15,7 +15,7 @@ export const Caption: React.FC<CaptionProps> = ({ caption, pages, currIndex }) =
     }
     const textStyles = {
         display: '-webkit-box',
-        textShadow: '0 0 3px #000',
+        textShadow: '0 0 5px #000',
         ['-webkit-line-clamp']: isOpen ? undefined : '2',
         ['-webkit-box-orient']: 'vertical',
         overflow: 'hidden',

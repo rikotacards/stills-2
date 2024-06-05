@@ -12,6 +12,7 @@ interface PostProps {
     authorId: string;
     postId: string;
     createdAt?: Timestamp;
+    isDraft: boolean;
 }
 
 const postContainerStyles = {
@@ -25,7 +26,7 @@ const postContainerStyles = {
     flexDirection: 'column',
     // border: '1px solid white',
 }
-export const Post: React.FC<PostProps> = ({ createdAt, postId, slides, authorId }) => {
+export const Post: React.FC<PostProps> = ({isDraft, createdAt, postId, slides, authorId }) => {
     const onAddReaction = async () => {
         addReaction({
             postAuthorId: UID,
@@ -46,7 +47,8 @@ export const Post: React.FC<PostProps> = ({ createdAt, postId, slides, authorId 
     return (
         <Box sx={postContainerStyles}>
 
-            <Slides authorId={authorId} postId={postId} slides={slides}/>
+            <Slides isDraft={isDraft}
+             authorId={authorId} postId={postId} slides={slides}/>
 
             {/* <Button size='small' onClick={onAddReaction} variant='contained'>Heart</Button>
             <Button size='small' onClick={onRemoveReaction} variant='contained'>Remove Heart</Button>  */}

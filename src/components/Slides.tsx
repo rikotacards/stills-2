@@ -15,6 +15,7 @@ interface SlidesProps {
     postId: string;
     children?: React.ReactNode
     authorId?: string;
+    isDraft: boolean;
 }
 
 import { EditPost } from './EditPost';
@@ -23,39 +24,61 @@ import { AuthorHeader } from './AuthorHeader';
 import { Reactions } from './Reactions';
 import { ImageWithLoading } from './ImageWithLoading';
 const swiperContainer = { display: 'flex', flexDirection: 'row' }
-export const Slides: React.FC<SlidesProps> = ({authorId, slides, postId }) => {
+export const Slides: React.FC<SlidesProps> = ({isDraft, authorId, slides, postId }) => {
     const [firstSwiper, setFirstSwiper] = React.useState(null);
     const [secondSwiper, setSecondSwiper] = React.useState(null);
     const drawerContext = useDrawerContext();
     const boxStyle = {
         pt: 4,
-        pb: 1,
+        pb: 2,
         pl:1,
         pr:1,
         background: `linear-gradient(
             to bottom,
             hsla(0, 0%, 0%, 0) 0%,
-      hsla(0, 0%, 0%, 0.034) 4.4%,
-      hsla(0, 0%, 0%, 0.079) 9.2%,
-      hsla(0, 0%, 0%, 0.133) 14.4%,
-      hsla(0, 0%, 0%, 0.193) 20%,
-      hsla(0, 0%, 0%, 0.258) 25.9%,
-      hsla(0, 0%, 0%, 0.326) 32.2%,
-      hsla(0, 0%, 0%, 0.394) 38.7%,
-      hsla(0, 0%, 0%, 0.462) 45.6%,
-      hsla(0, 0%, 0%, 0.527) 52.7%,
-      hsla(0, 0%, 0%, 0.587) 60.1%,
-      hsla(0, 0%, 0%, 0.641) 67.7%,
-      hsla(0, 0%, 0%, 0.686) 75.5%,
-      hsla(0, 0%, 0%, 0.72) 83.5%,
-      hsla(0, 0%, 0%, 0.742) 91.7%,
-      hsla(0, 0%, 0%, 0.75) 100%
+          hsla(0, 0%, 0%, 0.01) 4.1%,
+          hsla(0, 0%, 0%, 0.036) 7.8%,
+          hsla(0, 0%, 0%, 0.078) 11.2%,
+          hsla(0, 0%, 0%, 0.132) 14.5%,
+          hsla(0, 0%, 0%, 0.195) 17.9%,
+          hsla(0, 0%, 0%, 0.266) 21.7%,
+          hsla(0, 0%, 0%, 0.34) 25.9%,
+          hsla(0, 0%, 0%, 0.417) 30.8%,
+          hsla(0, 0%, 0%, 0.492) 36.6%,
+          hsla(0, 0%, 0%, 0.564) 43.4%,
+          hsla(0, 0%, 0%, 0.63) 51.5%,
+          hsla(0, 0%, 0%, 0.687) 61%,
+          hsla(0, 0%, 0%, 0.733) 72.1%,
+          hsla(0, 0%, 0%, 0.765) 85.1%,
+          hsla(0, 0%, 0%, 0.78) 100%
           )`
 
 
 
     }
 
+
+    // .forNow {
+    //     linear-gradient(
+    //       to bottom,
+    //       hsla(0, 0%, 0%, 0) 0%,
+    //       hsla(0, 0%, 0%, 0.008) 5.4%,
+    //       hsla(0, 0%, 0%, 0.03) 9.6%,
+    //       hsla(0, 0%, 0%, 0.065) 12.7%,
+    //       hsla(0, 0%, 0%, 0.111) 15.2%,
+    //       hsla(0, 0%, 0%, 0.165) 17.5%,
+    //       hsla(0, 0%, 0%, 0.228) 19.8%,
+    //       hsla(0, 0%, 0%, 0.295) 22.5%,
+    //       hsla(0, 0%, 0%, 0.367) 26%,
+    //       hsla(0, 0%, 0%, 0.441) 30.5%,
+    //       hsla(0, 0%, 0%, 0.515) 36.5%,
+    //       hsla(0, 0%, 0%, 0.588) 44.3%,
+    //       hsla(0, 0%, 0%, 0.658) 54.2%,
+    //       hsla(0, 0%, 0%, 0.722) 66.5%,
+    //       hsla(0, 0%, 0%, 0.78) 81.7%,
+    //       hsla(0, 0%, 0%, 0.83) 100%
+    //     );
+    //   };
 
     const [page, setPage] = React.useState(1);
     // from docs
@@ -82,7 +105,8 @@ export const Slides: React.FC<SlidesProps> = ({authorId, slides, postId }) => {
         </Box>
     )
     const onMoreClick = () => {
-        drawerContext.setComponent(<EditPost postId={postId} />)
+        drawerContext.setComponent(<EditPost
+             isDraft={isDraft} postId={postId} />)
         drawerContext.onOpen();
     }
    
@@ -96,7 +120,8 @@ export const Slides: React.FC<SlidesProps> = ({authorId, slides, postId }) => {
 
         }}>
             <Box sx={{mt:1, pr:1, width: '100%', position: 'absolute', top: 0, zIndex: 2, display: 'flex', alignItems: 'center' }}>
-                <IconButton  onClick={onMoreClick} ><MoreVert /></IconButton>
+              
+                <IconButton  sx={{ml:'auto'}} onClick={onMoreClick} ><MoreVert /></IconButton>
             </Box>
             <Box sx={swiperContainer}>
                 <Swiper

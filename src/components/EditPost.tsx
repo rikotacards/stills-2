@@ -4,12 +4,13 @@ import { deletePost } from '../firebase/post';
 
 interface EditPostProps {
     postId: string
+    isDraft: boolean;
 }
-export const EditPost:React.FC<EditPostProps> = ({postId}) => {
+export const EditPost:React.FC<EditPostProps> = ({postId, isDraft}) => {
     
     return (
         <Box>
-            <Button fullWidth onClick={() => deletePost(false, postId)} variant='outlined' color='error'>Delete</Button>
+            <Button fullWidth onClick={() => deletePost(isDraft, postId)} variant='outlined' color='error'>Delete</Button>
         </Box>
     )
 }
